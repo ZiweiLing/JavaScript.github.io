@@ -1,0 +1,181 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html bgcolor="#0000FF">
+  <head>
+    <title>Graduate Program in Columbia University Admission Form</title>
+    <script type="text/javascript">
+        
+      
+
+      function onSubmitFn()
+      {
+        var firstname = document.getElementById("firstName").value
+        var lastname = document.getElementById("lastName").value
+        var email = document.getElementById("emailAddress").value
+        var date = document.getElementById("birthDay").value
+        var program = document.getElementById("Program")
+        
+        re = /ˆ(([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})-(((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)-(0[1-9]|[12][0-9]|30))|(02-(0[1-9]|[1][0-9]|2[0-8]))))|((([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00))-02-29)$/
+        pattern_1 = /^([A-Za-z])\@([A-Za-z])\.([A-Za-z])$/
+        pattern_2 = /^([A-Za-z])\@([A-Za-z])\.([A-Za-z])\.([A-Za-z])$/
+        
+        if(firstname == null || firstname == "", lastname == null || lastname == "", email == null || email == "", program.selectedIndex == 0 || program.options[program.selectedIndex].value == -1){
+          alert ("Please Fill All Required Fields")
+          return false
+        }
+
+
+        if(date != '' && !date.match(re)) {
+          alert("Invalid date format: " + date)
+          return false
+        }
+
+        if(!email.match(pattern_1) && !email.match(pattern_2)){
+          alert("invalid email address")
+          return false
+        }
+
+        
+        
+        alert ("The Application is received.")
+        
+      }
+
+      function onResetFn()
+      {
+        alert ("In reset function, this will clear all values of the form")
+      }
+
+      // function focusFuction(x) 
+      // {
+      //   var ori = "#FFFFFF";
+      //   var fin = "#FFFF00";
+      //   var curRGB;
+      //   var curR = 0, curG = 0, curB = 0;
+      //   var oriR = parseInt(ori.substring(1,3), 16), oriG = parseInt(ori.substring(3,5), 16), oriB = parseInt(ori.substring(5,7), 16);
+      //   var finR = parseInt(fin.substring(1,3), 16), finG = parseInt(fin.substring(3,5), 16), finB = parseInt(fin.substring(5,7), 16);
+      //   var stepR = (oriR - finR) / 10, stepG = (oriG - finG) / 10, stepB = (oriB - finB) / 10;
+      //   // console.log(ori,fin, oriR, oriG, oriB, finR, finG, finB);
+      //   for(i = 1; i <= 10; i ++){
+      //     curR = parseInt(oriR - stepR * i);
+      //     curG = parseInt(oriG - stepG * i);
+      //     curB = parseInt(oriB - stepB * i);
+      //     curRGB = "#" + curR.toString(16) + curG.toString(16) + curB.toString(16);
+      //     g(i, x, curRGB);
+      //   }
+      // }
+
+      // var g = function(i, x, color){
+      //   console.log('i='+i+':');
+      //   // setTimeout(f(x, color), 2000);
+      //   setTimeout("console.log(1)", 1000)
+      // }
+
+      // var f = function(x, colorstr){
+      //   var color = colorstr;
+      //   console.log(x, color);
+      //   document.getElementById(x).style.background = color;
+      // }
+
+      function focusFuction(x)
+      {
+        var ori = "#FFFFFF";
+        var fin = "#FFFF00";
+        changecolor(x, ori, fin);
+      }
+      function blurFunction(x) 
+      {
+        var ori = "#FFFF00"
+        var fin = "#FFFFFF"
+        changecolor(x, ori, fin);
+      }
+
+      function changecolor(areaId, ori, fin){
+        var curRGB = "#";
+        var curR = 0, curG = 0, curB = 0;
+        var oriR = parseInt(ori.substring(1,3), 16), oriG = parseInt(ori.substring(3,5), 16), oriB = parseInt(ori.substring(5,7), 16);
+        var finR = parseInt(fin.substring(1,3), 16), finG = parseInt(fin.substring(3,5), 16), finB = parseInt(fin.substring(5,7), 16);
+        var stepR = (oriR - finR) / 10, stepG = (oriG - finG) / 10, stepB = (oriB - finB) / 10;
+        var cnt = 1;
+        var chage = setInterval(() => {
+          curRGB = "#";
+          if((curR = parseInt(oriR - stepR * cnt)) < 16){
+            curRGB += "0" + curR.toString(16);
+          }
+          else{
+            curRGB += curR.toString(16)
+          }
+          if((curG = parseInt(oriG - stepG * cnt)) < 16){
+            curRGB += "0" + curB.toString(16);
+          }
+          else{
+            curRGB += curG.toString(16)
+          }
+          if((curB = parseInt(oriB - stepB * cnt)) < 16){
+            curRGB += "0" + curG.toString(16);
+          }
+          else{
+            curRGB += curB.toString(16)
+          }
+          console.log("cnt="+cnt+":"+curRGB+"\n");
+          document.getElementById(areaId).style.background = curRGB;
+          cnt ++;
+          if(cnt == 11){
+            clearInterval(chage);
+          }
+        }, 200);
+      }
+
+    </script>
+  </head>
+
+
+    <body bgcolor="#EEEEFF" onload="alert ('Welcome to Columbia University')"
+    onunload="alert ('Thank you for your interest!')">
+
+    <hr>
+    <h1>Graduate Program in Columbia University Admission Form:</h1>
+    <hr>
+    <br />
+    <form onsubmit="return onSubmitFn()"
+      onreset="onResetFn()"
+      name="SimpleForm" method="post"
+      action="./Submit.html"> <!-- Once the form is submitted, the browswer is redirected to ApplicationSubmission.html page -->
+
+      First name*: <input type="text" id="firstName" name="firstname" onfocus="focusFuction(this.id)" onblur="blurFunction(this.id)"><br /><br />
+
+      Last name*:  <input type="text" id="lastName" name="lastname" onfocus="focusFuction(this.id)" onblur="blurFunction(this.id)"><br /><br />
+
+      Date of birth(yyyy-mm-dd): <input type="text" id="birthDay"  placeholder="yyyy-mm-dd" name="birthday" onfocus="focusFuction(this.id)" onblur="blurFunction(this.id)"><br /><br />
+
+      Current school:<input type="text" id="currentSchool" name="currentschool" onfocus="focusFuction(this.id)" onblur="blurFunction(this.id)"><br /><br />
+
+      Current grade: <input type="text" id="currentGrade" name="currentaddress" onfocus="focusFuction(this.id)" onblur="blurFunction(this.id)"><br /><br />
+
+      Email address*: <input type="text" id="emailAddress" name="emailaddress" onfocus="focusFuction(this.id)" onblur="blurFunction(this.id)" ><br /><br />
+
+      Graduate Program*:
+
+      <select id="Program">
+  <option value="-1">------------ choose your program* ------------</option>
+	<option value="CS">computer science</option>
+	<option value="EE">elecrical engineering</option>
+	<option value="ARCH">architecture</option>
+	<option value="lAW">law</option>
+	<option value="QMSS">quanitative methods of social science</option>
+	<option value="LITE">Literature</option>
+	<option value="JOUR">Journalism</option>
+	
+      </select>
+<br /><br />
+
+      Text Area:<br />
+
+      <textarea rows="20" cols="70">
+Please enter any general comments here. </textarea><br />
+
+      <input type="submit" value="Submit" name="submitButton">
+      <input type="reset" value="Reset" name="resetButton">
+    </form>
+    <hr>
+  </body>
+</html>
